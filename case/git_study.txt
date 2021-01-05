@@ -1,0 +1,9 @@
+操控远程命令：
+git remote add origin +厂库地址 #与远程代码库建立联系
+git remote -v 查询已建立的远程代码库
+git remote remove 移除远程代码库
+git init 初始化本地代码库
+git add . 提交添加所有文件到暂缓区 git add file_path 添加指定名称的文件
+git commit -m 'desc' 提交代码到本地仓库
+
+git log查询所有提交推送记录
