@@ -9,7 +9,7 @@ def get_upload_path(self, filename):
     return dir_path + '/' + ts + '/' + '/' + filename
 
 
-doc = ["docx", "doc"]
+doc = ["docx", "doc", 'txt', 'pdf']
 video = ['mp3', 'mp4']
 
 
