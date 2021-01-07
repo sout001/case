@@ -12,4 +12,4 @@ class BaseAdmin(admin.ModelAdmin):
 
 @admin.register(FileUpload)
 class FileUploadAdmin(BaseAdmin):
-    list_display = ['id', 'file_name', 'file_cover', 'file_size', 'create_time']
+    list_display = ['id', 'file_name', 'file_cover', 'image_display', 'file_size', 'create_time']

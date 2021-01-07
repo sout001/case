@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
-from case.utils import get_upload_path
+from case.utils import get_upload_path, file_upload_path
+from django.utils.html import format_html
 
 
 # Create your models here.
@@ -30,7 +31,7 @@ class FileUpload(BaseModel):
     file_name = models.CharField(verbose_name="文件名称", max_length=100)
     file_cover = models.ImageField(verbose_name="文件封面", upload_to=get_upload_path)
     file_uid = models.UUIDField(verbose_name="文件uid", null=True, blank=True)
-    file = models.FileField(verbose_name="文件", upload_to="")
+    file = models.FileField(verbose_name="文件", upload_to=file_upload_path)
     file_size = models.CharField(verbose_name="文件大小", max_length=100)
 
     class Meta:
@@ -40,3 +41,9 @@ class FileUpload(BaseModel):
 
     def __str__(self):
         return "id:" + str(self.id) + "-" + "文件名称" + self.file_name
+
+    def image_display(self):
+        return format_html('<a href="{}"><img src="{}" width="48px" height="48px"/></a>'
+                           , self.file_cover.url, self.file_cover.url)
+
+    image_display.short_description = '文件封面'
