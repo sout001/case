@@ -8,3 +8,5 @@ git commit -m 'desc' 提交代码到本地仓库
 
 git log查询所有提交推送记录
 
+git merge <分支名> 合并git 分支
+
