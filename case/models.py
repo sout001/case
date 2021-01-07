@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
+from case.utils import get_upload_path
 
 
 # Create your models here.
@@ -27,7 +28,7 @@ class BaseModel(models.Model):
 
 class FileUpload(BaseModel):
     file_name = models.CharField(verbose_name="文件名称", max_length=100)
-    file_cover = models.ImageField(verbose_name="文件封面", upload_to="")
+    file_cover = models.ImageField(verbose_name="文件封面", upload_to=get_upload_path)
     file_uid = models.UUIDField(verbose_name="文件uid", null=True, blank=True)
     file = models.FileField(verbose_name="文件", upload_to="")
     file_size = models.CharField(verbose_name="文件大小", max_length=100)
