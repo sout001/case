@@ -39,15 +39,3 @@ class FileUpload(BaseModel):
 
     def __str__(self):
         return "id:" + str(self.id) + "-" + "文件名称" + self.file_name
-
-
-class UserModel(models.Model):
-    user_name = models.CharField(verbose_name="用户名字", max_length=100, default="")
-    user_tel = models.CharField(verbose_name="用户电话", max_length=11)
-    user_pwd = models.CharField(verbose_name="用户密码", max_length=20)
-
-    class Meta:
-        verbose_name = "用户"
-        verbose_name_plural = "用户"
-        db_table = "用户"
-
