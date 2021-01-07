@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
-from case.utils import get_upload_path, file_upload_path
+from case.utils import get_upload_path, file_upload_path, tea_id, stu_id
 from django.utils.html import format_html
 
 
@@ -47,3 +47,48 @@ class FileUpload(BaseModel):
                            , self.file_cover.url, self.file_cover.url)
 
     image_display.short_description = '文件封面'
+
+
+SEX_TYPE = (
+    (0, '男'),
+    (1, '女')
+)
+
+
+class ClassModel(BaseModel):
+    class_name = models.CharField(verbose_name="班级名称", max_length=50)
+    class_nums = models.IntegerField(verbose_name="班级人数", default=30)
+
+    class Meta:
+        verbose_name = "班级"
+        verbose_name_plural = "班级"
+        db_table = "class"
+
+
+class TeacherModel(BaseModel):
+    tea_id = models.CharField(verbose_name="教师编号", max_length=18, null=False, blank=False, unique=True,
+                              default=tea_id)
+    tea_name = models.CharField(verbose_name="教师名称", max_length=50)
+    tea_sex = models.IntegerField(verbose_name="教师性别", choices=SEX_TYPE, default=0)
+    tea_age = models.IntegerField(verbose_name="教师年龄", null=True, blank=True)
+    tea_class = models.ManyToManyField(ClassModel, verbose_name="所教班级")
+
+    class Meta:
+        verbose_name = "教师"
+        verbose_name_plural = "教师"
+        db_table = "teacher"
+
+
+class StudentModel(BaseModel):
+    stu_id = models.CharField(verbose_name="学号", max_length=18, null=False, unique=True, blank=False,
+                              default=stu_id)
+    stu_name = models.CharField(verbose_name="学生姓名", max_length=50, null=False, blank=False)
+    stu_age = models.IntegerField(verbose_name="学生年龄")
+    stu_sex = models.IntegerField(verbose_name="学生性别", choices=SEX_TYPE, default=0)
+    stu_class = models.ForeignKey(ClassModel, verbose_name="所属班级", to_field='id', related_name="stu_class",
+                                  on_delete=models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = "学生"
+        verbose_name_plural = "学生"
+        db_table = "student"
