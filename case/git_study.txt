@@ -9,4 +9,7 @@ git commit -m 'desc' 提交代码到本地仓库
 git log查询所有提交推送记录
 
 git merge <分支名> 合并git 分支
+git reset <文件> 撤销一次add
+git reset --hard <commit ID> 撤销一次commit
+git revert commit_id 撤销上传提交
 
