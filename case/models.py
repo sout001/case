@@ -64,6 +64,9 @@ class ClassModel(BaseModel):
         verbose_name_plural = "班级"
         db_table = "class"
 
+    def __str__(self):
+        return "班级-" + self.class_name
+
 
 class TeacherModel(BaseModel):
     tea_id = models.CharField(verbose_name="教师编号", max_length=18, null=False, blank=False, unique=True,
@@ -77,6 +80,9 @@ class TeacherModel(BaseModel):
         verbose_name = "教师"
         verbose_name_plural = "教师"
         db_table = "teacher"
+
+    def __str__(self):
+        return "教师-" + self.tea_name
 
 
 class StudentModel(BaseModel):
@@ -92,3 +98,8 @@ class StudentModel(BaseModel):
         verbose_name = "学生"
         verbose_name_plural = "学生"
         db_table = "student"
+
+    def __str__(self):
+        return "学生-" + self.stu_name
+
+

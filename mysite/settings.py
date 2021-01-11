@@ -122,3 +122,11 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'resource')
 MEDIA_URL = '/resource/'
+
+SIMPLEUI_ANALYSIS = False
+SIMPLEUI_STATIC_OFFLINE = True
+SIMPLEUI_HOME_INFO = False
+SIMPLEUI_LOGIN_PARTICLES = False
+# SIMPLEUI_HOME_TITLE = '案列管理'
+# SIMPLEUI_LOGO = 'XX.logo'
+SIMPLEUI_HOME_ICON = 'fa fa-user'
