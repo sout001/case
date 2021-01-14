@@ -56,6 +56,9 @@ class ResourceModel(BaseModel):
         verbose_name_plural = "资源"
         db_table = "resource"
 
+    def __str__(self):
+        return "名称-" + self.resource_name + "-" + "资源类型" + self.resource_type
+
 
 class IndexPackage(BaseModel):
     package_name = models.CharField(verbose_name="资源包名称", max_length=50)
@@ -72,6 +75,9 @@ class IndexPackage(BaseModel):
         verbose_name_plural = "资源包"
         db_table = "resource_package"
 
+    def __str__(self):
+        return "名称" + "-" + self.package_name
+
 
 SEX_TYPE = (
     (0, '男'),
@@ -82,7 +88,7 @@ SEX_TYPE = (
 class UserModel(BaseModel):
     user_id = models.CharField(verbose_name="用户id", max_length=32, unique=True)
     user_name = models.CharField(verbose_name="用户昵称", max_length=20)
-    user_sex = models.IntegerField(verbose_name="用户性别", default=0)
+    user_sex = models.IntegerField(verbose_name="用户性别", choices=SEX_TYPE, default=0)
     user_phone = models.CharField(verbose_name="用户电话", max_length=11, unique=True)
     user_pwd = models.CharField(verbose_name="用户密码", max_length=32)
     avatar = models.CharField(verbose_name="用户头像", max_length=120)
@@ -92,11 +98,14 @@ class UserModel(BaseModel):
         verbose_name_plural = "用户"
         db_table = "user"
 
+    def __str__(self):
+        return "用户id" + "-" + self.user_id + "-" + "用户名称" + self.user_name
+
 
 class CommitModel(BaseModel):
     parent_id = models.IntegerField(verbose_name="根节点", null=True)
-    object = models.ForeignKey(ResourceModel, verbose_name="评论对象", to_field="id", related_name='object',
-                               on_delete=models.DO_NOTHING)
+    works = models.ForeignKey(ResourceModel, verbose_name="评论对象", to_field="id", related_name='works',
+                              on_delete=models.DO_NOTHING)
     user = models.ForeignKey(UserModel, verbose_name="用户", to_field="id", related_name='user',
                              on_delete=models.DO_NOTHING)
     content = models.CharField(verbose_name="评论内容", max_length=1800)
@@ -106,3 +115,6 @@ class CommitModel(BaseModel):
         verbose_name = "评论"
         verbose_name_plural = "评论"
         db_table = "commit"
+
+    def __str__(self):
+        return "评论id" + "-" + self.id

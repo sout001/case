@@ -21,5 +21,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('case/', include('case.urls')),
+    path('tree/', include('tree.urls')),
     re_path('^resource/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT})
 ]
